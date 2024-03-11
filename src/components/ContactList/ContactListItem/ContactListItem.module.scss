@@ -1,0 +1,23 @@
+.list-item {
+    display: flex;
+    padding-left: 8px;
+    border-bottom: 1px solid #1a73e8;
+
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+}
+
+.phone {
+    margin-right: 12px;
+    margin-left: auto;
+}
+
+.list-item-button {
+    width: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: lightcoral;
+}

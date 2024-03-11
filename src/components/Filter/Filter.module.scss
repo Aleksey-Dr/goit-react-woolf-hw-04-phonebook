@@ -1,0 +1,27 @@
+.filter-label {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+.filter-input {
+    margin-top: 12px;
+    width: 280px;
+    height: 48px;;
+
+    padding: 0 12px;
+
+    outline: none;
+    border-radius: 8px;
+    border: 2px solid  #dadce0;
+
+    background: none;
+
+    font-size: 16px;
+
+    &:focus {
+        border: 1px solid #1a73e8;
+        box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
+    }
+}
