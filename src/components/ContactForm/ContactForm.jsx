@@ -1,89 +1,93 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import css from './ContactForm.module.scss';
 
-class ContactForm extends Component {
-    state = {
-        name: '',
-        number: '',
-    };
+const ContactForm = ({ onSubmit }) => {
+
+    // ================== STATE
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    // ================== /STATE
 
     // ================== LOGIC
-    handlerInput = evt => {
-        const { name, value } = evt.currentTarget;
-        this.setState({
-            [name]: value,
-        });
+    const handleInput = evt => {
+        const { name, value } = evt.target;
+
+        switch(name) {
+            case 'name':
+                setName(value);
+                break;
+            case 'number':
+                setNumber(value);
+                break;
+            default:
+                return;
+        };
     };
 
-    handleSubmit = evt => {
+    const handleSubmit = evt => {
         evt.preventDefault();
 
-        const { name, number } = this.state;
-        this.props.onSubmit(name, number);
+        onSubmit(name, number);
 
-        this.reset();
+        reset();
     };
 
-    reset = () => {
-        this.setState({
-            name: '',
-            number: '',
-        });
+    const reset = () => {
+        setName('');
+        setNumber('');
     };
     // ================== /LOGIC
 
-    render() {
-        const { name, number } = this.state;
+    // const { name, number } = inputs;
 
-        return (
-            <div className={css['form-wrapper']}>
-                <form
-                    onSubmit={this.handleSubmit}
-                    name="contact-form"
-                    className={css.form}
-                >
-                    <div className={css['form-label-wrapper']}>
-                        <input
-                            onChange={this.handlerInput}
-                            value={name}
-                            id="name"
-                            type="text"
-                            name="name"
-                            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                            required
-                            placeholder=" "
-                            className={css['form-input']}
-                        />
-                        <label htmlFor="name" className={css['form-label']}>
-                            Name
-                        </label>
-                    </div>
-                    <div className={css['form-label-wrapper']}>
-                        <input
-                            onChange={this.handlerInput}
-                            value={number}
-                            id="phone"
-                            type="tel"
-                            name="number"
-                            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                            required
-                            placeholder=" "
-                            className={css['form-input']}
-                        />
-                        <label htmlFor="phone" className={css['form-label']}>
-                            Number
-                        </label>
-                    </div>
-                    <button type="submit" className={css['form-button']}>
-                        Add contact
-                    </button>
-                </form>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={css['form-wrapper']}>
+            <form
+                onSubmit={handleSubmit}
+                name="contact-form"
+                className={css.form}
+            >
+                <div className={css['form-label-wrapper']}>
+                    <input
+                        onChange={handleInput}
+                        value={name}
+                        id="name"
+                        type="text"
+                        name="name"
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                        required
+                        placeholder=" "
+                        className={css['form-input']}
+                    />
+                    <label htmlFor="name" className={css['form-label']}>
+                        Name
+                    </label>
+                </div>
+                <div className={css['form-label-wrapper']}>
+                    <input
+                        onChange={handleInput}
+                        value={number}
+                        id="phone"
+                        type="tel"
+                        name="number"
+                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                        required
+                        placeholder=" "
+                        className={css['form-input']}
+                    />
+                    <label htmlFor="phone" className={css['form-label']}>
+                        Number
+                    </label>
+                </div>
+                <button type="submit" className={css['form-button']}>
+                    Add contact
+                </button>
+            </form>
+        </div>
+    );
+};
 
 export default ContactForm;
